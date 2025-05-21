@@ -4,12 +4,7 @@ pipeline {
         IMAGE_NAME = "flask-selenium-test"
     }
     stages {
-        stage('Clone Repo') {
-            steps {
-                git 'https://github.com/WahidaSaliha/python-getting-started.git'
-            }
-        }
-
+        // 🚫 Remove 'Clone Repo' – Jenkins already checks out the code via Pipeline SCM
         stage('Linting') {
             steps {
                 sh 'pip install flake8 && flake8 app.py || true'
@@ -30,7 +25,7 @@ pipeline {
     }
     post {
         always {
-            sh 'docker system prune -af'
+            sh 'docker system prune -af || true'
         }
     }
 }
